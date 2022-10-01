@@ -1,0 +1,16 @@
+$breakpoint-mobile: 768px;
+
+.ma-login-user-container {
+    background: #0d47a1;
+    height: 100%;
+    padding-top: 30px;
+}
+.ma-login-user-form{
+    max-width: 50%;
+    margin: 0 auto;
+}
+@media (max-width: $breakpoint-mobile) {
+    .ma-login-user-form{
+        max-width: 85%
+    }
+}

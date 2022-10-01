@@ -1,0 +1,22 @@
+$breakpoint-mobile: 768px;
+
+.Report_list_table_card{
+    max-width: 80%;
+    margin: 0 auto;
+    td, th {
+        text-align: center;
+    }
+}
+
+@media (max-width: $breakpoint-mobile) {
+    .Report_list_table_card{
+        max-width: 85%
+    }
+}
+
+.Report_list_table {
+    width: 100%;
+}
+.Report_list_container {
+    background-color: #E0E0E0;
+}

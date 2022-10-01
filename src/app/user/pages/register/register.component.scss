@@ -1,0 +1,16 @@
+$breakpoint-mobile: 768px;
+
+.ma-register-user-container {
+    background: #0d47a1;
+    height: 100%;
+    padding-top: 30px;
+}
+.ma-register-user-form{
+    max-width: 50%;
+    margin: 0 auto;
+}
+@media (max-width: $breakpoint-mobile) {
+    .ma-register-user-form{
+        max-width: 85%
+    }
+}

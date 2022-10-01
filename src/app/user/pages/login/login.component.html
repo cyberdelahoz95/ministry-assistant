@@ -1,0 +1,16 @@
+<div class="ma-login-user-container">
+    <mat-card class="ma-login-user-form">
+        <mat-card-title>Welcome to Ministry Assistant 🔑</mat-card-title>
+        <mat-card-subtitle
+            >Please fill in all the fields in order to log in</mat-card-subtitle
+        >
+        <mat-card-content
+            ><ma-login-form
+                (onLoginSubmit)="handleSubmit($event)"
+            ></ma-login-form>
+        </mat-card-content>
+        <mat-card-footer>
+            <a mat-button [routerLink]="['/user/register']">Sign up </a>
+        </mat-card-footer>
+    </mat-card>
+</div>

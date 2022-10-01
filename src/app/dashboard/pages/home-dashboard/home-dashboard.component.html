@@ -1,0 +1,8 @@
+<div class="Dashboard-container" *ngIf="!isLoading">
+    <ma-last-month-report-card
+        (onGenerateMonthlyReportRequested)="generateMonthlyReport()"
+        (onUpdateMonthlyReportRequested)="updateMonthlyReport($event)"
+        [lastMonthReport]="lastMonthReportProp"
+    ></ma-last-month-report-card>
+    <!-- <ma-generate-sample-data></ma-generate-sample-data> -->
+</div>

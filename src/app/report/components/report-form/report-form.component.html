@@ -1,0 +1,93 @@
+<form [formGroup]="reportForm" (ngSubmit)="submitReport()">
+    <mat-checkbox formControlName="isFieldMinistryReport"
+        >You are reporting field service activity</mat-checkbox
+    >
+    <mat-form-field
+        *ngIf="!isFieldMinistryReport"
+        class="ma-report-form-input"
+        appearance="outline"
+    >
+        <mat-label>Alternative service time</mat-label>
+        <input
+            formControlName="otherServiceTime"
+            type="number"
+            matInput
+            [readonly]="isReadOnly"
+            placeholder="Tiempo"
+        />
+    </mat-form-field>
+    <ng-container *ngIf="isFieldMinistryReport">
+        <mat-form-field class="ma-report-form-input" appearance="outline">
+            <mat-label>Field service time</mat-label>
+            <input
+                formControlName="serviceTime"
+                type="number"
+                matInput
+                [readonly]="isReadOnly"
+                placeholder="Tiempo"
+            />
+        </mat-form-field>
+        <mat-form-field class="ma-report-form-input" appearance="outline">
+            <mat-label>Publications</mat-label>
+            <input
+                formControlName="publications"
+                type="number"
+                matInput
+                [readonly]="isReadOnly"
+                placeholder="Publicaciones"
+            />
+        </mat-form-field>
+        <mat-form-field class="ma-report-form-input" appearance="outline">
+            <mat-label>Videos</mat-label>
+            <input
+                formControlName="videos"
+                type="number"
+                matInput
+                [readonly]="isReadOnly"
+                placeholder="Videos"
+            />
+        </mat-form-field>
+        <mat-form-field class="ma-report-form-input" appearance="outline">
+            <mat-label>Return visits</mat-label>
+            <input
+                formControlName="returnVisits"
+                type="number"
+                matInput
+                [readonly]="isReadOnly"
+                placeholder="Revisitas"
+            />
+        </mat-form-field>
+    </ng-container>
+    <mat-form-field class="ma-report-form-input" appearance="outline">
+        <mat-label>Notes</mat-label>
+        <input
+            formControlName="notes"
+            type="text"
+            matInput
+            [readonly]="isReadOnly"
+            placeholder="Notas"
+        />
+    </mat-form-field>
+    <div class="ma-report-form-buttons">
+        <button
+            (click)="toggleReadOnly()"
+            *ngIf="isReadOnly"
+            mat-raised-button
+            color="primary"
+        >
+            <mat-icon>edit</mat-icon>Edit
+        </button>
+        <button *ngIf="!isReadOnly" mat-raised-button color="primary">
+            Save
+        </button>
+        <button
+            (click)="submitDelete()"
+            type="button"
+            *ngIf="!isReadOnly && !isNew"
+            mat-raised-button
+            color="warn"
+        >
+            <mat-icon>delete</mat-icon>Delete
+        </button>
+    </div>
+</form>

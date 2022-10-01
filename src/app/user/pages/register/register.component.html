@@ -1,0 +1,17 @@
+<div class="ma-register-user-container">
+    <mat-card class="ma-register-user-form">
+        <mat-card-title>Sign up 💼👜</mat-card-title>
+        <mat-card-subtitle
+            >Please fill in all the fields in order to register as a
+            user</mat-card-subtitle
+        >
+        <mat-card-content>
+            <ma-register-form
+                (onRegisterSubmit)="handleSubmit($event)"
+            ></ma-register-form>
+        </mat-card-content>
+        <mat-card-footer>
+            <a mat-button [routerLink]="['/user/login']">Sign in </a>
+        </mat-card-footer>
+    </mat-card>
+</div>

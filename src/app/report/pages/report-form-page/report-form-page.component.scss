@@ -1,0 +1,15 @@
+$breakpoint-mobile: 768px;
+
+.ma-report-form {
+    max-width: 50%;
+    margin: 0 auto;
+}
+@media (max-width: $breakpoint-mobile) {
+    .ma-report-form{
+        max-width: 85%
+    }
+}
+
+.Report_form_container {
+    background-color: #E0E0E0;
+}

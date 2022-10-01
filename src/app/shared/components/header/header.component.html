@@ -1,0 +1,20 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <a mat-menu-item [routerLink]="['/report/create']"> Add new report </a>
+        <a mat-menu-item [routerLink]="['/report/list']">
+            This month activity
+        </a>
+        <a mat-menu-item> Return visits </a>
+    </mat-menu>
+    <span>💼👜 Ministry Assistant</span>
+    <span class="header-toolbar-spacer"></span>
+    <button mat-raised-button [matMenuTriggerFor]="usermenu" color="accent">
+        {{ loggedUser?.name }}
+    </button>
+    <mat-menu #usermenu="matMenu">
+        <a mat-menu-item (click)="logOut()"> Log out </a>
+    </mat-menu>
+</mat-toolbar>
