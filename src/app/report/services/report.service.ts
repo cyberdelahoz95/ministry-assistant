@@ -56,7 +56,10 @@ export class ReportService {
     }
 
     postDailyReport(reportCreateRequest: DailyReportCreateRequest) {
-        if (reportCreateRequest.date === undefined) {
+        if (
+            reportCreateRequest.date === undefined ||
+            reportCreateRequest.date === ''
+        ) {
             reportCreateRequest.date = new Date().toDateString();
         }
         reportCreateRequest.userId = this.currentUserId;
@@ -65,9 +68,12 @@ export class ReportService {
         );
     }
 
-    postManyDailyReports(reportCreateRequests: DailyReportCreateRequest []) {
+    postManyDailyReports(reportCreateRequests: DailyReportCreateRequest[]) {
         reportCreateRequests.forEach((reportCreateRequest) => {
-            if (reportCreateRequest.date === undefined) {
+            if (
+                reportCreateRequest.date === undefined ||
+                reportCreateRequest.date === ''
+            ) {
                 reportCreateRequest.date = new Date().toDateString();
             }
             reportCreateRequest.userId = this.currentUserId;
