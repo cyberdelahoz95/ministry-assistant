@@ -1,6 +1,8 @@
 <mat-card>
     <ng-container *ngIf="lastMonthReport">
-        <mat-card-title>Your last month report</mat-card-title>
+        <mat-card-header>
+            <mat-card-title>Your last month report</mat-card-title>
+        </mat-card-header>
         <mat-card-content>
             <table class="monthly-report">
                 <tr>
@@ -40,7 +42,6 @@
                         {{ lastMonthReport.notes }}
                     </td>
                     <td *ngIf="isEditMode" colspan="6">
-                        {{ lastMonthReport.notes }}
                         <mat-form-field appearance="fill" class="notesInput">
                             <input
                                 matInput
@@ -80,7 +81,11 @@
         </mat-card-actions>
     </ng-container>
     <ng-container *ngIf="!lastMonthReport">
-        <mat-card-title>Your last month report is not ready!!</mat-card-title>
+        <mat-card-header>
+            <mat-card-title
+                >Your last month report is not ready!!</mat-card-title
+            >
+        </mat-card-header>
         <mat-card-content>
             <p>
                 Do not forget to generate your last month report and send it to

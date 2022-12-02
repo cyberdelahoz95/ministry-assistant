@@ -1,12 +1,16 @@
 <div *ngIf="!isLoading" class="Report_form_container">
     <mat-card class="ma-report-form">
-        <mat-card-title *ngIf="!currentDailyReport"
-            >New service report</mat-card-title
-        >
-        <mat-card-title *ngIf="currentDailyReport"
-            >Service report from
-            {{ currentDailyReport.date | date: "dd/MM/yyyy" }}</mat-card-title
-        >
+        <mat-card-header>
+            <mat-card-title *ngIf="!currentDailyReport"
+                >New service report</mat-card-title
+            >
+            <mat-card-title *ngIf="currentDailyReport"
+                >Service report from
+                {{
+                    currentDailyReport.date | date : "dd/MM/yyyy"
+                }}</mat-card-title
+            >
+        </mat-card-header>
         <mat-card-content>
             <ma-report-form
                 [dailyReport]="currentDailyReport"
