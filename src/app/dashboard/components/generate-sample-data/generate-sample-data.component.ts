@@ -1,7 +1,11 @@
 // TODO Can this component be included only in development environment??
 
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+    UntypedFormBuilder,
+    UntypedFormGroup,
+    Validators,
+} from '@angular/forms';
 import { DailyReportCreateRequest } from 'src/app/models/report.model';
 import startOfMonth from 'date-fns/startOfMonth';
 import addDays from 'date-fns/addDays';
@@ -53,10 +57,10 @@ export class GenerateSampleDataComponent implements OnInit {
                 date: reportDate.toDateString(),
             });
         }
-        console.log();
+
         this.reportService
             .postManyDailyReports(dailyReportCreateRequests)
-            .subscribe((postDailyReportResponse) => {
+            .then((postDailyReportResponse: any) => {
                 if (postDailyReportResponse.error == null) {
                     this.notificationService.notify({
                         title: 'Reports created succesfully!!',

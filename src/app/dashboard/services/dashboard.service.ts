@@ -15,11 +15,11 @@ const { generateMonthlyReport } = environment.dataFunctions;
 @Injectable()
 export class DashboardService {
     private supabase: SupabaseClient;
-    private currentUserId: string | undefined;
+    //private currentUserId: string | undefined;
 
     constructor(private userService: UserService) {
         this.supabase = this.userService.getSupabaseClient();
-        this.currentUserId = this.userService.getLoggedUserId();
+        //this.currentUserId = this.userService.getLoggedUserId();
     }
 
     putMonthlyReport(reportUpdateRequest: MonthlyReportUpdateRequest) {
@@ -29,8 +29,8 @@ export class DashboardService {
             this.supabase
                 .from(monthlyReports)
                 .update(reportUpdateRequest)
+                .eq('id', id)
                 .select()
-                .match({ id })
         ).pipe(
             catchError((error) => {
                 return throwError(error.error);
@@ -53,7 +53,7 @@ export class DashboardService {
 
         return from(
             this.supabase
-                .from<MonthlyReport>(monthlyReports)
+                .from(monthlyReports)
                 .select()
                 .gte('date', firstDayPrevMonth.toDateString())
                 .lte('date', lastDayPrevMonth.toDateString())

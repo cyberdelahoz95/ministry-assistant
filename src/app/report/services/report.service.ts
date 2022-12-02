@@ -17,16 +17,14 @@ const { dailyReports } = environment.tables;
 @Injectable()
 export class ReportService {
     private supabase: SupabaseClient;
-    private currentUserId: string | undefined;
 
     constructor(private userService: UserService) {
         this.supabase = this.userService.getSupabaseClient();
-        this.currentUserId = this.userService.getLoggedUserId();
     }
 
     getAllReports(dailyReportsSearchRequest: DailyReportSearchRequest) {
         let getAllReportsQueryBuilder = this.supabase
-            .from<DailyReport>(dailyReports)
+            .from(dailyReports)
             .select();
         if (
             dailyReportsSearchRequest.fromDate &&
@@ -55,20 +53,25 @@ export class ReportService {
         ).pipe(catchError((error) => throwError(error.error)));
     }
 
-    postDailyReport(reportCreateRequest: DailyReportCreateRequest) {
+    async postDailyReport(reportCreateRequest: DailyReportCreateRequest) {
         if (
             reportCreateRequest.date === undefined ||
             reportCreateRequest.date === ''
         ) {
             reportCreateRequest.date = new Date().toDateString();
         }
-        reportCreateRequest.userId = this.currentUserId;
-        return from(
-            this.supabase.from(dailyReports).insert([reportCreateRequest])
-        );
+        reportCreateRequest.userId = await this.userService.getLoggedUserId();
+
+        return await this.supabase
+            .from(dailyReports)
+            .insert([reportCreateRequest]);
     }
 
-    postManyDailyReports(reportCreateRequests: DailyReportCreateRequest[]) {
+    async postManyDailyReports(
+        reportCreateRequests: DailyReportCreateRequest[]
+    ) {
+        const userId = await this.userService.getLoggedUserId();
+
         reportCreateRequests.forEach((reportCreateRequest) => {
             if (
                 reportCreateRequest.date === undefined ||
@@ -76,11 +79,11 @@ export class ReportService {
             ) {
                 reportCreateRequest.date = new Date().toDateString();
             }
-            reportCreateRequest.userId = this.currentUserId;
+            reportCreateRequest.userId = userId;
         });
-        return from(
-            this.supabase.from(dailyReports).insert(reportCreateRequests)
-        );
+        return await this.supabase
+            .from(dailyReports)
+            .insert(reportCreateRequests);
     }
 
     putDailyReport(reportUpdateRequest: DailyReportUpdateRequest) {

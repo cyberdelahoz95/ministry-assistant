@@ -16,14 +16,15 @@ const { login } = environment.pages;
     styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-    loggedUser: User | null;
+    loggedUser: User | null = null;
     userInfoSubscription: Subscription = new Subscription();
 
-    constructor(private router: Router, private userService: UserService) {
-        this.loggedUser = this.userService.getLoggedUserMetadata() as User;
-    }
+    constructor(private router: Router, private userService: UserService) {}
 
-    ngOnInit(): void {
+    async ngOnInit(): Promise<void> {
+        this.loggedUser =
+            (await this.userService.getLoggedUserMetadata()) as User;
+
         this.userInfoSubscription = this.userService.userStatus$.subscribe(
             (newUserInfo) => {
                 this.loggedUser = newUserInfo

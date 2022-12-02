@@ -109,7 +109,7 @@ export class ReportFormPageComponent implements OnInit {
     private postDailyReport(dailyReportDTO: DailyReportCreateRequest) {
         this.reportService
             .postDailyReport(dailyReportDTO)
-            .subscribe((postDailyReportResponse) => {
+            .then((postDailyReportResponse) => {
                 if (postDailyReportResponse.error == null) {
                     this.notificationService.notify({
                         title: 'Report created succesfully!!',

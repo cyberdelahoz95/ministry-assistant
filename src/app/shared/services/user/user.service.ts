@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import {
+    AuthResponse,
     createClient,
     Session,
     SupabaseClient,
     User as CurrentUserInfo,
+    UserResponse,
 } from '@supabase/supabase-js';
 import { from, ReplaySubject } from 'rxjs';
 
@@ -19,43 +21,44 @@ import {
 })
 export class UserService {
     private supabase: SupabaseClient;
-    private session: Session | null;
+    private session: Session | null = null;
     private userStatus = new ReplaySubject<CurrentUserInfo>();
     userStatus$ = this.userStatus.asObservable();
 
     constructor() {
         this.supabase = createClient(
             environment.supabaseUrl,
-            environment.supabaseKey,
-            {
-                multiTab: false,
-            }
+            environment.supabaseKey
         );
-        this.session = this.supabase.auth.session();
-        this.supabase.auth.onAuthStateChange((event, session) => {
+        //this.session = this.supabase.auth.getSession();
+        this.supabase.auth.onAuthStateChange(async (event, session) => {
             this.session = session;
-            this.userStatus.next(this.supabase.auth.user() as CurrentUserInfo);
+            const getCurrentUserResponse: UserResponse =
+                await this.supabase.auth.getUser();
+            this.userStatus.next(
+                getCurrentUserResponse.data.user as CurrentUserInfo
+            );
         });
     }
 
-    async register(user: RegisterUserRequest): Promise<RegisterUserResponse> {
-        let registerRes: RegisterUserResponse = {
+    async register(user: RegisterUserRequest): Promise<AuthResponse> {
+        let registerRes: AuthResponse = {
             error: null,
-            user: null,
-            session: null,
+            data: {
+                user: null,
+                session: null,
+            },
         };
         try {
-            registerRes = await this.supabase.auth.signUp(
-                {
-                    email: user.email,
-                    password: user.password,
-                },
-                {
+            registerRes = await this.supabase.auth.signUp({
+                email: user.email,
+                password: user.password,
+                options: {
                     data: {
                         name: user.name,
                     },
-                }
-            );
+                },
+            });
         } catch (error) {
             console.log(error);
         }
@@ -63,15 +66,15 @@ export class UserService {
     }
 
     async authenticate(credentials: LoginRequest) {
-        return await this.supabase.auth.signIn(credentials);
+        return await this.supabase.auth.signInWithPassword(credentials);
     }
 
-    getLoggedUserMetadata() {
-        return this.supabase.auth.user()?.user_metadata;
+    async getLoggedUserMetadata() {
+        return (await this.supabase.auth.getUser())?.data.user?.user_metadata;
     }
 
-    getLoggedUserId() {
-        return this.supabase.auth.user()?.id;
+    async getLoggedUserId() {
+        return (await this.supabase.auth.getUser())?.data.user?.id;
     }
 
     isValidSession() {

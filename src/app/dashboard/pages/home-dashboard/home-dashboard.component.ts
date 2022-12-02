@@ -57,7 +57,8 @@ export class HomeDashboardComponent implements OnInit {
         this.setLoading(true);
         this.dashboardService
             .putMonthlyReport(monthlyReportUR)
-            .subscribe((putMpnthlyReportResponse) => {
+            .subscribe((putMpnthlyReportResponse: any) => {
+                //todo could it be improved the any
                 if (putMpnthlyReportResponse.error == null) {
                     this.handleGetLastMonthReportRes(putMpnthlyReportResponse);
                     this.notificationService.notify({

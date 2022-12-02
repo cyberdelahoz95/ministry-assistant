@@ -1,4 +1,4 @@
-import { User as SupabaseUser, Session, ApiError } from '@supabase/supabase-js';
+import { User as SupabaseUser, Session } from '@supabase/supabase-js';
 
 export interface RegisterUserRequest {
     name: string;
@@ -8,7 +8,7 @@ export interface RegisterUserRequest {
 }
 
 export interface RegisterUserResponse {
-    error: ApiError | null;
+    error: any; // ToDo could it be fixed?
     session: Session | null;
     user: SupabaseUser | null;
 }
