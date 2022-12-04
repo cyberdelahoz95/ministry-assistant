@@ -4,7 +4,7 @@
             <mat-card-title>Your last month report</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            <table class="monthly-report">
+            <table class="monthly-report monthly-report-desktop">
                 <tr>
                     <th>Month / Year</th>
                     <th>Field service time</th>
@@ -52,8 +52,66 @@
                     </td>
                 </tr>
             </table>
+
+            <table class="monthly-report monthly-report-mobile">
+                <tr>
+                    <th>Month / Year</th>
+                    <td>{{ lastMonthReport.date }}</td>
+                </tr>
+                <tr>
+                    <th>Field service time</th>
+                    <td>{{ lastMonthReport.serviceTime }}</td>
+                </tr>
+                <tr>
+                    <th>Alt. service time</th>
+                    <td>{{ lastMonthReport.otherServiceTime }}</td>
+                </tr>
+                <tr>
+                    <th>Publications</th>
+                    <td>{{ lastMonthReport.publications }}</td>
+                </tr>
+                <tr>
+                    <th>Videos</th>
+                    <td>{{ lastMonthReport.videos }}</td>
+                </tr>
+                <tr>
+                    <th>Return visits</th>
+                    <td>{{ lastMonthReport.returnVisits }}</td>
+                </tr>
+                <tr>
+                    <th>Bible studies</th>
+                    <td *ngIf="!isEditMode">
+                        {{ lastMonthReport.bibleStudies }}
+                    </td>
+                    <td *ngIf="isEditMode">
+                        <mat-form-field appearance="fill">
+                            <input
+                                matInput
+                                type="number"
+                                placeholder="Bible Studies"
+                                [formControl]="bibleStudiesFormControl"
+                            />
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Notes</td>
+                    <td colspan="6" *ngIf="!isEditMode">
+                        {{ lastMonthReport.notes }}
+                    </td>
+                    <td *ngIf="isEditMode" colspan="6">
+                        <mat-form-field appearance="fill" class="notesInput">
+                            <input
+                                matInput
+                                placeholder="Add notes"
+                                [formControl]="notesFormControl"
+                            />
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </table>
         </mat-card-content>
-        <mat-card-actions align="end">
+        <mat-card-actions class="monthly-report-actions" align="end">
             <button
                 (click)="toggleEditMode()"
                 *ngIf="!isEditMode"

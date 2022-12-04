@@ -1,10 +1,25 @@
+.monthly-report-desktop, .monthly-report-actions  {
+    display: none;
+}
+
 .monthly-report {
     text-align: center;
     th, td {
         border-style: groove;
         padding:1em;
     }
+    margin-bottom: 10px !important;
 }
-.notesInput {
-    width:100%;
+
+$breakpoint-tablet: 768px;
+@media (min-width: $breakpoint-tablet) {
+    .monthly-report-mobile {
+        display: none;
+    }
+    .monthly-report-desktop, .monthly-report-actions {
+        display:block;
+    }
+    .notesInput {
+        width:100%;
+    }
 }
