@@ -83,7 +83,9 @@
                     <td *ngIf="!isEditMode">
                         {{ lastMonthReport.bibleStudies }}
                     </td>
-                    <td *ngIf="isEditMode">
+                </tr>
+                <tr *ngIf="isEditMode">
+                    <td colspan="2">
                         <mat-form-field appearance="fill">
                             <input
                                 matInput
@@ -94,12 +96,15 @@
                         </mat-form-field>
                     </td>
                 </tr>
+
                 <tr>
                     <td>Notes</td>
-                    <td colspan="6" *ngIf="!isEditMode">
+                    <td *ngIf="!isEditMode">
                         {{ lastMonthReport.notes }}
                     </td>
-                    <td *ngIf="isEditMode" colspan="6">
+                </tr>
+                <tr *ngIf="isEditMode">
+                    <td colspan="2">
                         <mat-form-field appearance="fill" class="notesInput">
                             <input
                                 matInput
@@ -124,7 +129,7 @@
                 (click)="updateMonthlyReportRequest()"
                 *ngIf="isEditMode"
                 mat-raised-button
-                color="primary"
+                color="secondary"
             >
                 Save
             </button>

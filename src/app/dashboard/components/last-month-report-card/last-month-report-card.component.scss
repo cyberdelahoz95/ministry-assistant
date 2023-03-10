@@ -1,4 +1,4 @@
-.monthly-report-desktop, .monthly-report-actions  {
+.monthly-report-desktop  {
     display: none;
 }
 
@@ -9,6 +9,10 @@
         padding:1em;
     }
     margin-bottom: 10px !important;
+}
+
+.monthly-report-actions button {
+    margin-right: 10px;
 }
 
 $breakpoint-tablet: 768px;
