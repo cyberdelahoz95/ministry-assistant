@@ -7,6 +7,7 @@ export const environment = {
     tables: {
         dailyReports: 'daily-reports',
         monthlyReports: 'monthly-reports',
+        transportationReports: 'transportation-services',
     },
     dataFunctions: {
         generateMonthlyReport: 'generate_previous_month_report',
