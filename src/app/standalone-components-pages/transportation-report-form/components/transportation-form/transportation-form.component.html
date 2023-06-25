@@ -1,0 +1,43 @@
+<form [formGroup]="reportForm" (ngSubmit)="submitReport()">
+    <mat-form-field class="ma-report-form-input" appearance="outline">
+        <mat-label>Cost</mat-label>
+        <input
+            formControlName="cost"
+            type="number"
+            matInput
+            placeholder="Cost"
+        />
+    </mat-form-field>
+    <mat-form-field class="ma-report-form-input" appearance="outline">
+        <mat-label>Description</mat-label>
+        <input
+            formControlName="description"
+            type="text"
+            matInput
+            [readonly]="isReadOnly"
+            placeholder="Description"
+        />
+    </mat-form-field>
+    <div class="ma-report-form-buttons">
+        <button
+            (click)="toggleReadOnly()"
+            *ngIf="isReadOnly"
+            mat-raised-button
+            color="primary"
+        >
+            Edit
+        </button>
+        <button *ngIf="!isReadOnly" mat-raised-button color="primary">
+            Save
+        </button>
+        <button
+            (click)="submitDelete()"
+            type="button"
+            *ngIf="!isReadOnly && !isNew"
+            mat-raised-button
+            color="warn"
+        >
+            Delete
+        </button>
+    </div>
+</form>

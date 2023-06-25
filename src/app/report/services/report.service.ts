@@ -8,7 +8,6 @@ import {
     DailyReportCreateRequest,
     DailyReportUpdateRequest,
     DailyReportSearchRequest,
-    DailyReport,
 } from '../../models/report.model';
 import { UserService } from 'src/app/shared/services/user/user.service';
 
